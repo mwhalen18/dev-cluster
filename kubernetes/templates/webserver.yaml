@@ -13,7 +13,7 @@ spec:
   revisionHistoryLimit: 2
   source:
     path: webserver
-    repoURL: https://github.com/mwhalen18/dev-cluster
+    repoURL: https://github.com/mwhalen18/dev-cluster.git
     targetRevision: HEAD
     helm:
       parameters:
