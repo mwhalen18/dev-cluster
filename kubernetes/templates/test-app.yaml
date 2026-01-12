@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: test-app
     server: '{{ .Values.spec.destination.server }}'
-  project: mam-daas
+  project: default
   revisionHistoryLimit: 2
   source:
     path: test-app
