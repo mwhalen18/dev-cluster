@@ -1,0 +1,33 @@
+{{- range $chart := .Values.charts }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $chart.name }}
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=true
+    argocd.argoproj.io/sync-wave: "{{ $chart.sync_wave | default 0 | toString }}"
+spec:
+  project: default
+  source:
+    repoURL: {{ $.Values.github_repo }}
+    path: {{ $.Values.base_path }}/{{ $chart.name }}
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+      ignoreMissingValueFiles: true
+  destination:
+    server: {{ $.Values.destination.server }}
+    namespace: {{ $chart.name }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true #https://www.arthurkoziel.com/fixing-argocd-crd-too-long-error/, https://www.howtogeek.com/devops/what-is-kubernetes-server-side-apply-ssa/
+---
+{{- end }}
