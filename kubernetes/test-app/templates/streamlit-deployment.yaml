@@ -27,7 +27,7 @@ spec:
         - args:
             - --server.headless=true
             - --server.enableCORS=false
-          image: http://localhost:5000/streamlit-app
+          image: localhost:5000/streamlit-app
           name: streamlit
           ports:
             - containerPort: 8501
