@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: test-app
+    server: '{{ .Values.spec.destination.server }}'
+  project: mam-daas
+  revisionHistoryLimit: 2
+  source:
+    path: test-app
+    repoURL: '{{ .Values.spec.source.repoURL }}'
+    targetRevision: '{{ .Values.spec.source.targetRevision }}'
+    helm:
+      parameters:
+        - name: cluster_context.alb_CertificateArn
+          value: '{{ .Values.spec.cluster_context.alb_CertificateArn }}'
+        - name: cluster_context.alb_Subnets
+          value: '{{ .Values.spec.cluster_context.alb_Subnets }}'
+        - name: cluster_context.alb_SecurityGroups
+          value: '{{ .Values.spec.cluster_context.alb_SecurityGroups }}'
+        - name: cluster_context.applicationKey
+          value: '{{ .Values.spec.cluster_context.applicationKey }}'
+        - name: cluster_context.applicationName
+          value: '{{ .Values.spec.cluster_context.applicationName }}'
+        - name: cluster_context.applicationService
+          value: '{{ .Values.spec.cluster_context.applicationService }}'
+        - name: cluster_context.pipelineBuildNumber
+          value: '{{ .Values.spec.cluster_context.pipelineBuildNumber }}'
+        - name: cluster_context.pipelineBranch
+          value: '{{ .Values.spec.cluster_context.pipelineBranch }}'
+        - name: cluster_context.environment
+          value: '{{ .Values.spec.cluster_context.environment }}'
+        - name: cluster_context.environmentRegion
+          value: '{{ .Values.spec.cluster_context.environmentRegion }}'
+        - name: cluster_context.networkDomainName
+          value: '{{ .Values.spec.cluster_context.networkDomainName }}'
+        - name: http_proxy
+          value: '{{ .Values.spec.http_proxy }}'
+        - name: no_proxy
+          value: '{{ .Values.spec.no_proxy }}'
+        - name: ecr.registry
+          value: '{{ .Values.spec.image.registry }}'
+        - name: ecr.prefix
+          value: '{{ .Values.spec.image.prefix }}'
+        - name: image
+          value: '{{ .Values.test_app.image }}'
+  syncPolicy:
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+      - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true

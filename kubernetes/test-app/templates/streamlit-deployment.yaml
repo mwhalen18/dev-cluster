@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose -f /home/mwhalen18/kompose/komposer-apps/test-app/docker-compose.yml -o /home/mwhalen18/ci-cluster/kubernetes/test-app convert -c
+    kompose.cmd: kompose -f test-app.yaml convert -c
     kompose.service.type: NodePort
     kompose.version: 1.37.0 (fb0539e64)
   labels:
@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose -f /home/mwhalen18/kompose/komposer-apps/test-app/docker-compose.yml -o /home/mwhalen18/ci-cluster/kubernetes/test-app convert -c
+        kompose.cmd: kompose -f test-app.yaml convert -c
         kompose.service.type: NodePort
         kompose.version: 1.37.0 (fb0539e64)
       labels:
