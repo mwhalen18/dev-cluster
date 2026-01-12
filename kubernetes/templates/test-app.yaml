@@ -13,8 +13,8 @@ spec:
   revisionHistoryLimit: 2
   source:
     path: test-app
-    repoURL: '{{ .Values.spec.source.repoURL }}'
-    targetRevision: '{{ .Values.spec.source.targetRevision }}'
+    repoURL: https://github.com/mwhalen18/dev-cluster
+    targetRevision: HEAD
     helm:
       parameters:
         - name: cluster_context.alb_CertificateArn
