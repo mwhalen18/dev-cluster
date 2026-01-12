@@ -10,7 +10,7 @@ spec:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: kubernetes/app-of-apps
+    path: kubernetes
     repoURL: https://github.com/mwhalen18/dev-cluster
     targetRevision: HEAD
   project: default
