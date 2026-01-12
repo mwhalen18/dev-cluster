@@ -1,0 +1,8 @@
+name: /home/mwhalen18/ci-cluster/kubernetes/test-app
+description: A generated Helm Chart for /home/mwhalen18/ci-cluster/kubernetes/test-app from Skippbox Kompose
+version: 0.0.1
+apiVersion: v2
+keywords:
+  - /home/mwhalen18/ci-cluster/kubernetes/test-app
+sources:
+home:
