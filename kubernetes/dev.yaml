@@ -25,5 +25,14 @@ web_apps:
     namespace: test-app
     ad_group: all
     url_base_pathname: /
+  - name: webserver
+    description: Test
+    service: streamlit
+    port: "4000"
+    namespace: webserver
+    ad_group: all
+    url_base_pathname: /
 test_app:
+  image: streamlit-app
+webserver:
   image: streamlit-app
