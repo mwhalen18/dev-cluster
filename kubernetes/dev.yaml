@@ -1,6 +1,7 @@
 spec:
   destination:
     server: https://kubernetes.default.svc
+    namespace: argocd
   source:
     repoURL: https://github.com/mwhalen18/dev-cluster
     targetRevision: HEAD
