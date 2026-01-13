@@ -6,53 +6,41 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    namespace: test-app
-    server: https://kubernetes.default.svc
   project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test-app
   revisionHistoryLimit: 2
   source:
-    path: kubernetes/test-app
     repoURL: https://github.com/mwhalen18/dev-cluster.git
     targetRevision: HEAD
+    path: kubernetes/test-app
     helm:
+      valuesObject:
+        cluster_context:
+          alb_CertificateArn: ""
+          alb_Subnets: ""
+          alb_SecurityGroups: ""
+          applicationKey: ""
+          applicationName: "test-app"
+          applicationService: "test-app"
+          pipelineBuildNumber: ""
+          pipelineBranch: ""
+          environment: ""
+          environmentRegion: ""
+          networkDomainName: ""
+        http_proxy: ""
+        no_proxy: ""
+        ecr:
+          registry: ""
+          prefix: ""
       parameters:
-        - name: cluster_context.alb_CertificateArn
-          value: '{{ .Values.spec.cluster_context.alb_CertificateArn }}'
-        - name: cluster_context.alb_Subnets
-          value: '{{ .Values.spec.cluster_context.alb_Subnets }}'
-        - name: cluster_context.alb_SecurityGroups
-          value: '{{ .Values.spec.cluster_context.alb_SecurityGroups }}'
-        - name: cluster_context.applicationKey
-          value: '{{ .Values.spec.cluster_context.applicationKey }}'
-        - name: cluster_context.applicationName
-          value: '{{ .Values.spec.cluster_context.applicationName }}'
-        - name: cluster_context.applicationService
-          value: '{{ .Values.spec.cluster_context.applicationService }}'
-        - name: cluster_context.pipelineBuildNumber
-          value: '{{ .Values.spec.cluster_context.pipelineBuildNumber }}'
-        - name: cluster_context.pipelineBranch
-          value: '{{ .Values.spec.cluster_context.pipelineBranch }}'
-        - name: cluster_context.environment
-          value: '{{ .Values.spec.cluster_context.environment }}'
-        - name: cluster_context.environmentRegion
-          value: '{{ .Values.spec.cluster_context.environmentRegion }}'
-        - name: cluster_context.networkDomainName
-          value: '{{ .Values.spec.cluster_context.networkDomainName }}'
-        - name: http_proxy
-          value: '{{ .Values.spec.http_proxy }}'
-        - name: no_proxy
-          value: '{{ .Values.spec.no_proxy }}'
-        - name: ecr.registry
-          value: '{{ .Values.spec.image.registry }}'
-        - name: ecr.prefix
-          value: '{{ .Values.spec.image.prefix }}'
-        - name: image
-          value: '{{ .Values.test_app.image }}'
+        name: image
+        value: '{{ .Values.test_app.image }}'
   syncPolicy:
-    syncOptions:
-      - PrunePropagationPolicy=foreground
-      - CreateNamespace=true
     automated:
-      selfHeal: true
       prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
