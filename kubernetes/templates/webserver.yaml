@@ -34,6 +34,7 @@ spec:
         ecr:
           registry: ""
           prefix: ""
+        image: "webserver"
       parameters:
         name: image
         value: '{{ .Values.webserver.image }}'

@@ -34,6 +34,7 @@ spec:
         ecr:
           registry: ""
           prefix: ""
+        image: "test-app"
       parameters:
         name: image
         value: '{{ .Values.test_app.image }}'
