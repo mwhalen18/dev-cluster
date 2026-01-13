@@ -1,0 +1,22 @@
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/mwhalen18/dev-cluster
+    targetRevision: HEAD
+    path: kubernetes
+  cluster_context:
+    alb_CertificateArn: ''
+    alb_Subnets: ''
+    alb_SecurityGroups: ''
+    applicationKey: ''
+    applicationService: ''
+    applicationName: ''
+    pipelineBuildNumber: ''
+    pipelineBranch: ''
+    environment: ''
+    environmentRegion: ''
+    networkDomainName: ''
+  app_context:
+    project_url: "https://github.com/mwhalen18/dev-cluster.git"
+    project_name: testing
