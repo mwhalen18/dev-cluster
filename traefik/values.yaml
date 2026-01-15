@@ -1,7 +1,7 @@
 replicas: 1
 
 service:
-  type: ClusterIP  # since Caddy will reverse-proxy
+  type: LoadBalancer  # since Caddy will reverse-proxy
 
 ingressRoute:
   dashboard:
