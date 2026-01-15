@@ -8,7 +8,7 @@ ingressRoute:
     enabled: true
     entryPoints:
       - web
-    domain: traefik.eks.mydomain.com
+    domain: traefik.eks.matthewrwhalen.com
 
 ingressClass:
   enabled: true
