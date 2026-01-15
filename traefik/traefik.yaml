@@ -15,7 +15,7 @@ spec:
           - $traefik/traefik-values.yaml
     - repoURL: https://github.com/mwhalen18/dev-cluster
       targetRevision: main
-      ref: values
+      ref: traefik
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
