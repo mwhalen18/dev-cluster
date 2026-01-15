@@ -6,12 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/mwhalen18/dev-cluster'
-    targetRevision: main
-    path: traefik
+    repoURL: 'https://helm.traefik.io/traefik'
+    chart: traefik
+    targetRevision: 38.0.2
     helm:
       valueFiles:
-        - values.yaml
+        - traefik-values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: traefik  # <- where Traefik is installed
