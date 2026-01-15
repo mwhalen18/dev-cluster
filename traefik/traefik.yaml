@@ -7,15 +7,16 @@ spec:
   project: default
 
   sources:
+    - repoURL: https://github.com/mwhalen18/dev-cluster
+      targetRevision: main
+      ref: traefik
+
     - chart: traefik
       repoURL: https://traefik.github.io/charts
       targetRevision: "38.0.2"
       helm:
         valueFiles:
         - $traefik/values.yaml
-    - repoURL: https://github.com/mwhalen18/dev-cluster
-      targetRevision: main
-      ref: traefik
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
