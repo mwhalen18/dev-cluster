@@ -2,19 +2,19 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: traefik
-  namespace: argocd
+  namespace: argocd  # ArgoCD lives here
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:your-org/ci-cluster.git'
+    repoURL: 'https://github.com/mwhalen18/ci-cluster.git'
     targetRevision: main
-    path: kubernetes/traefik/helm
+    path: traefik
     helm:
       valueFiles:
         - values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: traefik
+    namespace: traefik  # <- where Traefik is installed
   syncPolicy:
     automated:
       prune: true
