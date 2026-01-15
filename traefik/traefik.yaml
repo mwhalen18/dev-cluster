@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/mwhalen18/ci-cluster.git'
+    repoURL: 'https://github.com/mwhalen18/dev-cluster'
     targetRevision: main
     path: traefik
     helm:
