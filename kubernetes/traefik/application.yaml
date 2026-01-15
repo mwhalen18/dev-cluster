@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:your-org/ci-cluster.git'
+    targetRevision: main
+    path: kubernetes/traefik/helm
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: traefik
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
