@@ -6,6 +6,9 @@ service:
 ingressRoute:
   dashboard:
     enabled: true
+    entryPoints:
+      - web
+    domain: traefik.eks.mydomain.com
 
 ingressClass:
   enabled: true
