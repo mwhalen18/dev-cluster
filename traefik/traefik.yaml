@@ -2,19 +2,23 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: traefik
-  namespace: argocd  # ArgoCD lives here
+  namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: 'https://helm.traefik.io/traefik'
-    chart: traefik
-    targetRevision: 38.0.2
-    helm:
-      valueFiles:
-        - traefik-values.yaml
+
+  sources:
+    - chart: traefik
+      repoURL: https://traefik.github.io/charts
+      targetRevision: "38.0.2"
+      helm:
+        valueFiles:
+          - $traefik/traefik-values.yaml
+    - repoURL: https://github.com/mwhalen18/dev-cluster
+      targetRevision: main
+      ref: values
   destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: traefik  # <- where Traefik is installed
+    server: https://kubernetes.default.svc
+    namespace: traefik
   syncPolicy:
     automated:
       prune: true
