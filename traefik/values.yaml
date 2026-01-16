@@ -1,22 +1,15 @@
-# 1. Change Service Type to LoadBalancer
+replicas: 1
+
 service:
-  enabled: true
-  type: LoadBalancer
+  type: LoadBalancer  # since Caddy will reverse-proxy
 
-# 2. Configure Entrypoints to trust Caddy's IP
-# Replace '192.168.1.XX' with the actual LAN IP of your Caddy server
-ports:
-  web:
-    proxyProtocol:
-      trustedIPs:
-        - "127.0.0.1/32"
-        - "192.168.86.157" # Your Caddy Server IP
-    forwardedHeaders:
-      trustedIPs:
-        - "127.0.0.1/32"
-        - "192.168.86.157" # Your Caddy Server IP
-
-# 3. (Optional) Enable the Dashboard for easy debugging
 ingressRoute:
   dashboard:
     enabled: true
+    entryPoints:
+      - web
+    domain: traefik.eks.matthewrwhalen.com
+
+ingressClass:
+  enabled: true
+  isDefaultClass: false
